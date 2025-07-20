@@ -254,6 +254,10 @@ sudo chown -R ubuntu:ubuntu /mnt/shared
 Create `venv pytorch`:
 ```
 cd /mnt/shared
+
+sudo apt update
+sudo apt install python3.12-venv
+
 python3 -m venv pytorch_env
 source pytorch_env/bin/activate
 python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
@@ -271,15 +275,14 @@ python
 create `run_ddp_job.sh` and `distributed_train.py` files on `/mnt/shared`
 
 ```
-juju exec -u slurmd/` -- sbatch /mnt/shared/run_ddp_job.sh
+juju exec -u slurmd/1` -- sbatch /mnt/shared/run_ddp_job.sh
 ```
 
+After submission, outputs will be in the `logs/ddp_job_%j.out`
 
-🧼 Cleanup
+### Cleanup
 ```
 juju destroy-model slurm-hpc --destroy-storage
 juju destroy-controller lxd-controller --destroy-all-models --destroy-storage
 ```
-📁 License
 
-MIT. Feel free to modify and reuse for cluster bootstrapping or educational HPC work.
