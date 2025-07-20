@@ -151,11 +151,11 @@ microceph cluster bootstrap
 microceph disk add loop,7G,3
 ```
 After running above command you shall see a success:
-+-----------+---------+
-|   PATH    | STATUS  |
-+-----------+---------+
-| loop,7G,3 | Success |
-+-----------+---------+
++-----------+---------+ \n
+|   PATH    | STATUS  | \n
++-----------+---------+ \n
+| loop,7G,3 | Success | \n
++-----------+---------+ \n
 
 We will create two new disk pools, then assign the two pools to a new filesystem with the name `cephfs`:
 ```
