@@ -271,7 +271,7 @@ python
 create `run_ddp_job.sh` and `distributed_train.py` files on `/mnt/shared`
 
 ```
-juju exec -u slurmd/1` -- sbatch /mnt/shared/run_ddp_job.sh
+juju exec -u slurmd/1 -- sbatch /mnt/shared/run_ddp_job.sh
 ```
 
 After submission, outputs will be in the `logs/ddp_job_%j.out`
