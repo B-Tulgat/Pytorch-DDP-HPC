@@ -22,6 +22,6 @@ torchrun \
   --rdzv_id=$SLURM_JOB_ID \
   --rdzv_backend=c10d \
   --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
-  my_distributed_train.py
+  distributed_train.py
 
 echo "Distributed training job finished."
