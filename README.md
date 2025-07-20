@@ -1,7 +1,6 @@
 # Pytorch-DPP-HPC
 This guide demonstrates how to deploy a high-performance compute (HPC) cluster using Juju, LXD, and Slurm with shared storage powered by CephFS.
 
-    ✅ Designed for local testing, but follows production-grade principles: 3 MONs, 3 OSDs, real shared FS, and VMs instead of containers.
 
 🧱 Architecture Overview
 
@@ -10,7 +9,9 @@ This guide demonstrates how to deploy a high-performance compute (HPC) cluster u
 | `slurmctld`         | 1            | Slurm controller                             |
 | `slurmdbd`          | 1            | Slurm accounting daemon                      |
 | `slurmd`            | 2            | Compute nodes                                |
+| `sackd`             | 1            | For slurm control                            |
 | `mysql`             | 1            | Backend DB for SlurmDBD                      |
+| `slurmrestd `       | 1            | Slurm rest daemon                            |
 | `cephfs-server`     | 1            | High bandwidth access file system server     |
 | `filesystem-client` | 1 per `slurmd` | Mounts CephFS at `/mnt/shared`             |
 
