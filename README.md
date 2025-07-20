@@ -282,3 +282,5 @@ juju destroy-model slurm-hpc --destroy-storage
 juju destroy-controller lxd-controller --destroy-all-models --destroy-storage
 ```
 
+### References
+1. https://canonical-charmed-hpc.readthedocs-hosted.com/latest/
