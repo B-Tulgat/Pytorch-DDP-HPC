@@ -4,16 +4,17 @@ This guide demonstrates how to deploy a high-performance compute (HPC) cluster u
     ✅ Designed for local testing, but follows production-grade principles: 3 MONs, 3 OSDs, real shared FS, and VMs instead of containers.
 
 🧱 Architecture Overview
-Component	| Count |	Role
-slurmctld	| 1 |	Slurm controller
-slurmdbd	| 1 |	Slurm accounting daemon
-slurmd	| 2 |	Compute nodes
-mysql	| 1 |	Backend DB for SlurmDBD
-ceph-mon |	3 |	Ceph monitors (quorum)
-ceph-osd |	3 |	Ceph OSDs with dedicated loop storage
-ceph-mgr |	1 |	Ceph manager
-ceph-mds |	1 |	Ceph metadata server (for CephFS)
-filesystem-client |	1 per slurmd |	Mounts CephFS at /mnt/shared
+
+|Component	| Count |	Role
+|slurmctld	| 1 |	Slurm controller
+|slurmdbd	| 1 |	Slurm accounting daemon
+|slurmd	| 2 |	Compute nodes
+|mysql	| 1 |	Backend DB for SlurmDBD
+|ceph-mon |	3 |	Ceph monitors (quorum)
+|ceph-osd |	3 |	Ceph OSDs with dedicated loop storage
+|ceph-mgr |	1 |	Ceph manager
+|ceph-mds |	1 |	Ceph metadata server (for CephFS)
+|filesystem-client |	1 per slurmd |	Mounts CephFS at /mnt/shared
 📦 Requirements
 
     Ubuntu 22.04+ (host system)
@@ -33,6 +34,15 @@ Juju installed (v3.6+):
    ` sudo snap install juju --classic --channel=3.6/stable`
 
 1️⃣ Bootstrap Juju Controller on LXD
+
+Before bootstrapping if your system has `docker` already installed due to security and isolation reasons docker automatically disables NAT forwarding. Therefore check if NAT FORWARD is disabled by:
+`sudo iptables -L FORWARD -v -n`
+
+if it is disabled then enable FORWARD by:
+
+`sudo iptables -P FORWARD ACCEPT`
+
+The reason for doing this is because when the controller LXC container starts when the FORWARD is disabled there would be no internet connection. Therefore by enabling this you are able to start the controller.
 
 `juju bootstrap localhost lxd-controller`
 
